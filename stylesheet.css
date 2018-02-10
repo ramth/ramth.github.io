@@ -1,0 +1,28 @@
+h1 {
+	width: 500px;
+	vertical-align: text-bottom;
+	text-align: center;
+	margin: auto;
+	color: black;
+	border-radius: 5px;
+	background-color: rgb(173, 170, 239);
+
+}
+
+p {
+	width : 500px;
+	margin: auto;
+	background-color: white;
+	color: black;
+}
+
+ul#top_menu {
+
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+ul#top_menu li {
+	display: inline;
+	width: 100px;
+}
