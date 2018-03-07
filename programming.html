@@ -3,17 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <title>Python Apprentice</title>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
 <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 
 <body>
 <section class="blog_post">
-<h1>Why Python</h1>
-<br>
-<p> I started off with Java and C++. I dabbled with Python and as a first
-project I crawled a website and made a simple encrypting and decrypting alogrithm.
-It is so much easier to get started as a new developer.
+<h1>Creating a Windows Installer with WiX Burn</h1>
+<br><br>
+<p> 
+In our work project,our current build process for windows is to package our python application with cx-Freeze to give an msi or exe package
+This worked great even as we added alot of third party python packages but we had dependencies on external applications
+that came with their own installers. In comes Wix Burn: a bootstrapper that allows chaining of msi
+and exe packages with extra features to execute installation logic. The logic is specified in xml and compiled by the
+candle and light tools that are part of the WiX toolset
+</p>
+<br><br>
+<p>
+The chain is where you can quite literally chain individual installers with additional logic like
+Install Conditions, in the snippet below we check for a version of an installed library
+</p>
+<pre width=30>
+<p id=code>
+&ltChain&gt
+      &ltMsiPackage Id="Dependency1" 
+	  SourceFile="external\bossa-x64-1.8.msi" /&gt
+	  &ltExePackage 	Id="Dependency2"
+			SourceFile="test.exe
+			Vital="no"
+			InstallCondition="NOT (lib_version ~= 
+			&ampquot;4.10.01.00&ampquot;)"/&gt
+&lt/Chain&gt
+</p>
+
+<p>
+How did we get information of the installed library ? Using a registry search !
+</p>
+<pre width=30>
+<p id=code>
+&ltFragment&gt
+  &ltutil:RegistrySearch
+		Id="LIB_VERSION"
+		Win64="yes"
+		Root="HKCU"
+		Key="Software\test_lib\info"
+		Value="Version"
+		Result="value"
+		Variable="lib_version"/&gt
+&lt/Fragment&gt
+</p>
+<br><br>
+<p>
+The complete WiX file:
+</p>
+<pre width=30>
+<p id=code>
+&lt?xml version="1.0"?&gt
+&ltWix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+ xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+ &gt
+
+&ltBundle Name="SampleBundle" Version="1.0.0" 
+	UpgradeCode="INSERT_UPGRADE_CODE" Manufacturer="M"&gt
+
+	&ltutil:RegistrySearchRef Id='LIB_VERSION' /&gt
+	&ltBootstrapperApplicationRef 
+		Id="WixStandardBootstrapperApplication.RtfLicense"&gt
+		&ltbal:WixStandardBootstrapperApplication
+            LicenseFile="license.rtf"
+            LogoFile="resources/NemaSymbol_scaled_no_alpha.png"
+			ThemeFile="CustomTheme.xml"
+            /&gt
+	&lt/BootstrapperApplicationRef&gt
+
+    &ltChain&gt
+      &ltMsiPackage Id="Dependency1" 
+	  SourceFile="external\bossa-x64-1.8.msi" /&gt
+	  &ltExePackage 	Id="Dependency2"
+			SourceFile="test.exe
+			Vital="no"
+			InstallCondition="NOT (lib_version ~= 
+			&ampquot;4.10.01.00&ampquot;)"/&gt
+    &lt/Chain&gt
+  &lt/Bundle&gt
+
+
+  &ltFragment&gt
+  &ltutil:RegistrySearch
+		Id="LIB_VERSION"
+		Win64="yes"
+		Root="HKCU"
+		Key="Software\test_lib\info"
+		Value="Version"
+		Result="value"
+		Variable="lib_version"/&gt
+   &lt/Fragment&gt
+
+&lt/Wix&gt
+
+
+</p>
+</pre>
 </section>
 </body>
 

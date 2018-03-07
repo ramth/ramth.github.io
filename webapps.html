@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Python Apprentice</title>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+	<canvas id="glCanvas" width="640" height="480"></canvas>
+	<button id="pushButton" type="button" onclick="testFunction()">Don't push my buttons</button>
+</body>
+
+<script>
+
+var button_presses = 0;
+var pushButton = document.getElementById("pushButton");
+function testFunction() {
+	if (button_presses == 0) {
+		pushButton.innerHTML = "I hate you";
+	}
+	else if (button_presses == 1) {
+		pushButton.innerHTML = "No really don't push me";
+	}
+	else {
+		pushButton  	.innerHTML = "*angry silence*";
+	}
+	button_presses++;
+}
+</script>
