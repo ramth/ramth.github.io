@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+ xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+ >
+
+<Bundle Name="SampleBundle" Version="1.0.0" UpgradeCode="INSERT_UPGRADE_CODE" Manufacturer="M">
+    
+	<util:RegistrySearchRef Id='LIB_VERSION' />
+	<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+		<bal:WixStandardBootstrapperApplication
+            LicenseFile="license.rtf"
+            LogoFile="resources/NemaSymbol_scaled_no_alpha.png"
+			ThemeFile="CustomTheme.xml"
+            />
+	</BootstrapperApplicationRef>
+	
+    <Chain>
+      <MsiPackage Id="Dependency1" SourceFile="external\bossa-x64-1.8.msi" />
+	  <ExePackage 	Id="Dependency2" 
+					SourceFile="test.exe
+					Vital="no"
+					InstallCondition="NOT (lib_version ~= &quot;4.10.01.00&quot;)"/>
+    </Chain>
+  </Bundle>
+  
+  
+  <Fragment>
+  <util:RegistrySearch
+		Id="LIB_VERSION"
+		Win64="yes"
+		Root="HKCU"
+		Key="Software\test_lib\info"
+		Value="Version"
+		Result="value"
+		Variable="lib_version"/>
+   </Fragment>
+
+</Wix>
