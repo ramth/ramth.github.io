@@ -9,8 +9,19 @@
 </head>
 
 <body>
+	<div id="top_menu"></div>
 	<canvas id="glCanvas" width="640" height="480"></canvas>
 	<button id="pushButton" type="button" onclick="testFunction()">Don't push my buttons</button>
+	<script>
+		var menu_html = new XMLHttpRequest();
+		menu_html.open('GET', 'navbar.html',true);
+		menu_html.onreadystatechange = function() {
+		if (this.readyState!==4) document.getElementById('top_menu').innerHTML = 'not ready';
+		if (this.status!==200) document.getElementById('top_menu').innerHTML = 'not status 200';
+		document.getElementById('top_menu').innerHTML = this.responseText;
+		};
+		menu_html.send();
+	</script>
 </body>
 
 <script>

@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html>
-<ul id="top_menu">
-<li><a href="">Home</a></li>
-<li><a href="programming.html">Programming</a></li>
-<li><a href="webapps.html">Web apps</a></li>
-<li>Physics</li>
-<li>About Me</li>
-</ul>
-
 <head>
 <meta charset="UTF-8">
 <title>self.website</title>
@@ -15,7 +7,19 @@
 </head>
 
 <body>
+<div id=top_menu></div>
+<br><br>
 <h1> Welcome to Ram's Website </h1>
+<script>
+var menu_html = new XMLHttpRequest();
+menu_html.open('GET', 'navbar.html',true);
+menu_html.onreadystatechange = function() {
+	if (this.readyState!==4) document.getElementById('top_menu').innerHTML = 'not ready';
+	if (this.status!==200) document.getElementById('top_menu').innerHTML = 'not status 200';
+	document.getElementById('top_menu').innerHTML = this.responseText;
+};
+menu_html.send();
+</script>
 </body>
 
 

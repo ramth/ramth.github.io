@@ -10,6 +10,8 @@
 
 
 <body>
+<div id="top_menu"></div>
+<br><br>
 <section class="blog_post">
 <h1>Creating a Windows Installer with WiX Burn</h1>
 <br><br>
@@ -109,6 +111,16 @@ The complete WiX file:
 </p>
 </pre>
 </section>
+<script>
+	var menu_html = new XMLHttpRequest();
+	menu_html.open('GET', 'navbar.html',true);
+	menu_html.onreadystatechange = function() {
+		if (this.readyState!==4) document.getElementById('top_menu').innerHTML = 'not ready';
+		if (this.status!==200) document.getElementById('top_menu').innerHTML = 'not status 200';
+		document.getElementById('top_menu').innerHTML = this.responseText;
+	};
+	menu_html.send();
+</script>
 </body>
 
 </html>
