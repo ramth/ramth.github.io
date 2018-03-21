@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Python Apprentice</title>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> 
+<link rel="stylesheet" href="stylesheet.css">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115435269-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115435269-1');
+</script>
+
+</head>
+
+
+<body>
+<div id="top_menu"></div>
+<br><br>
+<p>
+A website that I am making mostly from scratch with some blog posts that detail some nifty programming related things that has helped me out.
+If you have any comments or questions, send me an email at <a href="mailto:ram.rajagopal93@gmail.com">ram.rajagopal93@gmail.com</a>
+</p>
+
+
+<script>
+	var menu_html = new XMLHttpRequest();
+	menu_html.open('GET', 'navbar.html',true);
+	menu_html.onreadystatechange = function() {
+		if (this.readyState!==4) document.getElementById('top_menu').innerHTML = 'not ready';
+		if (this.status!==200) document.getElementById('top_menu').innerHTML = 'not status 200';
+		document.getElementById('top_menu').innerHTML = this.responseText;
+	};
+	menu_html.send();
+</script>
+</body>
