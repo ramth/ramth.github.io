@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>self.website</title>
+<title>Ram's website</title>
 <link rel="stylesheet" href="stylesheet.css">
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115435269-1"></script>
@@ -17,9 +17,65 @@
 </head>
 
 <body>
-<div id=top_menu></div>
+<div id=top_menu>
+<style>
+a {
+	font-size: 1.5em;
+	flex: 0.5;
+	flex-basis: 0;
+	flex-grow: 1;
+	text-align: center;
+}
+
+a:link {
+	color : black;
+    text-decoration: none;
+}
+
+a:visited {
+	color : black;
+    text-decoration: none;
+}
+
+a:hover {
+	color : gray;
+    text-decoration: none;
+}
+
+a:active {
+	color : black;
+    text-decoration: none;
+}
+
+.spacer{
+	flex : 1.5;
+}
+
+.top_menu {
+	position: sticky;
+	top: 0;
+	background-color: #30e5b4;
+	margin: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	align-content: space-between;
+	
+}
+</style>
+<div class="top_menu">
+<div class="spacer"></div>
+<a href="https://ramth.github.io/index.html">Home</a>
+<a href="https://ramth.github.io/programming.html">Programming</a>
+<a href="https://ramth.github.io/webapps.html">Web apps</a>
+<!--<a href="physics.html">Physics</a>-->
+<a href="https://ramth.github.io/about.html">About</a>
+<div class="spacer"></div>
+</div>
+</div>
 <br><br>
 <h1> Welcome to Ram's Website </h1>
+<!--
 <script>
 var menu_html = new XMLHttpRequest();
 menu_html.open('GET', 'navbar.html',true);
@@ -30,6 +86,7 @@ menu_html.onreadystatechange = function() {
 };
 menu_html.send();
 </script>
+-->
 </body>
 
 
